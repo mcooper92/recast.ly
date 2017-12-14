@@ -5,9 +5,9 @@ var searchYouTube = (options, callback) => {
     dataType: 'json',  
     data: {
       part: 'snippet',
-      key: YOUTUBE_API_KEY, 
+      key: options.key, 
       q: options.query,
-      maxResults: 5,
+      maxResults: options.max || 5,
       type: 'video',
       videoEmbeddable: 'true'
     },
