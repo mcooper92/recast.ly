@@ -10,8 +10,19 @@ class App extends React.Component {
   
   onVidEntryClickHandler(newVideo) {
     this.setState({currentVideo: newVideo});
+    
   }
   
+  searchHandler(videoArray) {
+    //this.setState({videos: videoArray});
+    // console.log(videoArray
+  }
+  
+  componentDidMount(query, searchHandler) { 
+    // console.log(this)
+    searchYouTube({'query': query, 'max': 5, key: window.YOUTUBE_API_KEY}, this.searchHandler); 
+  }
+
 
   render() {
     return (
@@ -42,3 +53,4 @@ window.App = App;
 
 
 // unifying idea behind react, info flows down 
+// 12/14: TRY WILLMOUNT JUST TO EXPERIMENT
