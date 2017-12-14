@@ -12,15 +12,22 @@ class App extends React.Component {
     this.setState({currentVideo: newVideo});
     
   }
+
+  onSubmitClickHandler(newQuery) {
+    var newQuery = ($('#formQuery').val());
+    searchYouTube({key: window.YOUTUBE_API_KEY, 'query': newQuery, 'max': 5}, (itemsArray) => this.searchHandler(itemsArray)); 
+  }
+
   
   searchHandler(videoArray) {
-    //this.setState({videos: videoArray});
-    // console.log(videoArray
+    this.setState({videos: videoArray, currentVideo: videoArray[0]});
+   
+    
   }
   
-  componentDidMount(query, searchHandler) { 
-    // console.log(this)
-    searchYouTube({'query': query, 'max': 5, key: window.YOUTUBE_API_KEY}, this.searchHandler); 
+  componentDidMount(query = 'Chance the Rapper', searchHandler) {  
+    searchYouTube({key: window.YOUTUBE_API_KEY, 'query': query, 'max': 5}, (itemsArray) => this.searchHandler(itemsArray)); 
+    
   }
 
 
@@ -29,7 +36,7 @@ class App extends React.Component {
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search />
+            <Search clickFunction= {this.onSubmitClickHandler.bind(this)} />
           </div>
         </nav>
         <div className="row">
